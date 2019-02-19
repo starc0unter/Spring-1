@@ -1,13 +1,13 @@
 package com.geekbrains.entities;
 
 public class Product {
-    private Long id;
+    private long id;
     private String title;
     private long cost;      //in cents
 
     public Product() {}
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
@@ -27,7 +27,7 @@ public class Product {
         return cost;
     }
 
-    public void setCost(Long cost) {
+    public void setCost(long cost) {
         this.cost = cost;
     }
 }
