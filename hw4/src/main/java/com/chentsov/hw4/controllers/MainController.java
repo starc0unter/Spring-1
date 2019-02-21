@@ -5,10 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
+@RequestMapping("/")
 public class MainController {
     private ProductService productService;
 
@@ -17,27 +17,28 @@ public class MainController {
         this.productService = productService;
     }
 
-    @GetMapping("/{pageno}")
+    @GetMapping("{pageno}")
     public String showMain(@PathVariable("pageno") int pageNumber, Model model){
         model.addAttribute("products", productService.getAllProducts(pageNumber, 5));
+        model.addAttribute("currentPageNumber", pageNumber);
         return "index";
     }
 
-    @GetMapping("/min/{price}")
-    public String showLess(@PathVariable("price") long price, Model model){
-        model.addAttribute("products", productService.getProductsWithLessPrice(price));
+    @RequestMapping(method = RequestMethod.GET, params = "max")
+    public String showLess(@RequestParam("max") long max, Model model){
+        model.addAttribute("products", productService.getProductsWithLessPrice(max));
         return "index";
     }
 
-    @GetMapping("/max/{price}")
-    public String showMore(@PathVariable("price") long price, Model model){
-        model.addAttribute("products", productService.getProductsWithGreaterPrice(price));
+    @RequestMapping(method = RequestMethod.GET, params = "min")
+    public String showMore(@RequestParam("min") long min, Model model){
+        model.addAttribute("products", productService.getProductsWithGreaterPrice(min));
         return "index";
     }
 
-    @GetMapping("/between/{floor}_{ceil}")
-    public String showBetween(@PathVariable("floor") long floor, @PathVariable("ceil") long ceil, Model model){
-        model.addAttribute("products", productService.getProductsWithPriceBetween(floor, ceil));
+    @RequestMapping(method = RequestMethod.GET, params = "min, max")
+    public String showBetween(@RequestParam("min") long min, @RequestParam("max") long max, Model model){
+        model.addAttribute("products", productService.getProductsWithPriceBetween(min, max));
         return "index";
     }
 
