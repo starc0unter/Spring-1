@@ -40,13 +40,13 @@ public class ProductController {
         return "products";
     }
 
-    @GetMapping("/modify")
-    public String modifyProduct(Model model, @RequestParam(value = "id") Long productId) {
+    @GetMapping("/modify/{id}")
+    public String modifyProduct(Model model, @PathVariable(value = "id") Long productId) {
         Product product = productService.getProductById(productId).orElse(null);
         if (product == null) return "products";
 
         model.addAttribute("product", product);
-        return "product_modify";
+        return "product_add";
     }
 
     @PostMapping("/modify")

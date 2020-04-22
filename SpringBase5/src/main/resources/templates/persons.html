@@ -39,6 +39,7 @@
         <th>Last name</th>
         <th>Age</th>
         <th>Email</th>
+        <th>Modify</th>
     </tr>
     </thead>
     <tbody>
@@ -47,6 +48,9 @@
         <td th:text="${person.lastName}">LN</td>
         <td th:text="${person.age}">12</td>
         <td th:text="${person.email}">email</td>
+        <td>
+            <a th:href="@{/person/modify/{id}(id=${person.id})}">Modify</a>
+        </td>
     </tr>
 
     <tr th:unless="${persons.hasContent()}">
