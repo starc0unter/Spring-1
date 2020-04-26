@@ -1,0 +1,30 @@
+GET http://localhost:8189/app/api/v1/product/all
+
+###
+
+GET http://localhost:8189/app/api/v1/product/id/24
+
+###
+
+POST http://localhost:8189/app/api/v1/product/create
+Content-Type: application/json
+
+{
+  "title": "RestProduct1",
+  "price": 75
+}
+
+###
+
+POST http://localhost:8189/app/api/v1/product/create
+Content-Type: application/json
+
+{
+  "id": 100,
+  "title": "RestProduct1",
+  "price": 75
+}
+
+###
+
+DELETE http://localhost:8189/app/api/v1/product/delete/id/24

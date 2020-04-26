@@ -10,6 +10,7 @@ import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -22,33 +23,23 @@ public class ProductService {
     }
 
     @Transactional(readOnly = true)
-    public Optional<Product> getProductById(@NonNull Long id) {
+    public Optional<Product> findProductById(@NonNull Long id) {
         return productRepository.findById(id);
     }
 
     @Transactional(readOnly = true)
-    public Page<Product> getPagedProducts(@NonNull Pageable pageable) {
-        return productRepository.findAll(pageable);
-    }
-
-    @Transactional(readOnly = true)
-    public Page<Product> getProductsWithGreaterPrice(@NonNull Long min, @NonNull Pageable pageable) {
-        return productRepository.findAllByPriceGreaterThanEqual(min, pageable);
-    }
-
-    @Transactional(readOnly = true)
-    public Page<Product> getProductsWithLessPrice(@NonNull Long max, @NonNull Pageable pageable) {
-        return productRepository.findAllByPriceLessThanEqual(max, pageable);
-    }
-
-    @Transactional(readOnly = true)
-    public Page<Product> getProductsWithPriceBetween(@NonNull Long min, @NonNull Long max, @NonNull Pageable pageable) {
-        return productRepository.findAllByPriceBetween(min, max, pageable);
+    public List<Product> findAll() {
+        return productRepository.findAll();
     }
 
     @Transactional
     public Product saveOrUpdate(@NonNull Product product) {
         return productRepository.save(product);
+    }
+
+    @Transactional
+    public void delete(long id) {
+        productRepository.deleteById(id);
     }
 
     @Transactional(readOnly = true)

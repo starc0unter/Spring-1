@@ -42,7 +42,7 @@ public class ProductController {
 
     @GetMapping("/modify/{id}")
     public String modifyProduct(Model model, @PathVariable(value = "id") Long productId) {
-        Product product = productService.getProductById(productId).orElse(null);
+        Product product = productService.findProductById(productId).orElse(null);
         if (product == null) return "products";
 
         model.addAttribute("product", product);

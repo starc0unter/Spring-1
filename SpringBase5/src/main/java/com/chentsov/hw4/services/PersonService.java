@@ -10,6 +10,7 @@ import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -31,9 +32,19 @@ public class PersonService {
         return personRepository.findById(id);
     }
 
+    @Transactional
+    public void deleteById(long id) {
+        personRepository.deleteById(id);
+    }
+
     @Transactional(readOnly = true)
     public Page<Person> findAll(@NonNull Pageable pageable) {
         return personRepository.findAll(pageable);
+    }
+
+    @Transactional(readOnly = true)
+    public List<Person> findAll() {
+        return personRepository.findAll();
     }
 
     @Transactional(readOnly = true)

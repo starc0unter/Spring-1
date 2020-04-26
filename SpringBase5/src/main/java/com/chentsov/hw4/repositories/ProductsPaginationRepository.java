@@ -2,11 +2,11 @@ package com.chentsov.hw4.repositories;
 
 import com.chentsov.hw4.entities.Product;
 import org.springframework.data.domain.Page;
-import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.domain.Pageable;
 import org.springframework.lang.NonNull;
 
-public interface ProductsPaginationRepository extends PagingAndSortingRepository<Product, Long> {
+public interface ProductsPaginationRepository extends JpaRepository<Product, Long> {
 
     Page<Product> findAllByPriceGreaterThanEqual(@NonNull Long price, @NonNull Pageable pageable);
 
