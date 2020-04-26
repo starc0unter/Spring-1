@@ -1,0 +1,46 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Add Person</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+    <meta name="ctx" th:content="${#httpServletRequest.getContextPath()}"/>
+</head>
+
+<body>
+
+<div th:replace="~{fragments/navigation :: navi(AddPerson)}"></div>
+
+<h1>Person</h1>
+<div class="container">
+    <form th:action="@{/person/form}" th:object="${person}" method="post">
+        <div class="form-group">
+            <input th:type="hidden" th:field="*{id}">
+        </div>
+        <div class="form-group">
+            <label for="FirstName">First name</label>
+            <input type="text" th:field="*{firstName}" class="form-control" id="FirstName" placeholder="First name">
+        </div>
+        <div class="form-group">
+            <label for="LastName">Last name</label>
+            <input type="text" th:field="*{lastName}" class="form-control" id="LastName" placeholder="Last name">
+        </div>
+        <div class="form-group">
+            <label for="Age">Age</label>
+            <input type="text" th:field="*{age}" class="form-control" id="Age" placeholder="Age">
+        </div>
+        <div class="form-group">
+            <label for="Email">Email</label>
+            <input type="text" th:field="*{email}" class="form-control" id="Email" placeholder="Email">
+            <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email error</div>
+        </div>
+        <button type="submit">Save</button>
+    </form>
+</div>
+
+</body>
+</html>
